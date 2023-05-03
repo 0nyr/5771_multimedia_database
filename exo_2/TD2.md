@@ -90,7 +90,7 @@ M = 1 - G = 1 - 0,6 = 0,4
 
 Y = 1 - B = 1 - 0,3 = 0,7
 
-K = 0
+K = Min(C, M, Y) = 0.4
 
 Conversion: RGB <-> HSV
 
