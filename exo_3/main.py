@@ -1,8 +1,11 @@
 import numpy as np
-import random
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
+import os
+
 
 # Global variable for Gaussian noise dithering
-WITH_GAUSSIAN_NOISE = False
+WITH_GAUSSIAN_NOISE = True
 
 def group_and_split_highest_chanel_range(pixels, nb_colors_stop) -> list[np.ndarray]:
     
@@ -33,7 +36,7 @@ def quantize_median_cut(image, n_colors):
 
     # Apply Gaussian noise dithering, if enabled
     if WITH_GAUSSIAN_NOISE:
-        noise = np.random.normal(0, 10.5, size=distances.shape)
+        noise = np.random.normal(-10, 10, size=distances.shape)
         distances += noise
 
     labels = np.argmin(distances, axis=1)
@@ -46,10 +49,6 @@ def quantize_median_cut(image, n_colors):
 
 # main
 if __name__ == "__main__":
-    import matplotlib.pyplot as plt
-    import matplotlib.image as mpimg
-    import os
-
     # Load the image
     image = mpimg.imread(os.path.join(os.path.dirname(__file__), "img/Angel-of-Sanctions-Amonkhet-MtG-Art.jpg"))
 

@@ -25,7 +25,7 @@ Sure! Here's an outline of the main properties of GIF, PNG, and JPEG image forma
 **PNG:**
 
 - Color model: RGBA (Red Green Blue Alpha).
-- Color depth: 24-bit or 32-bit (supports alpha channel for transparency).
+- Color depth: 24-bit (correction) or 32-bit (supports alpha channel for transparency).
 - Compression: Lossless compression algorithm that uses deflate compression.
 - File size: Larger than GIF files but smaller than uncompressed TIFF files. Best suited for images that require transparency or images with high color depth such as graphics or diagrams.
 
@@ -54,7 +54,15 @@ In Java:
 * `float`: 32-bit IEEE 754 floating point (-3.4028235E38 to 3.4028235E38)
 * `double`: 64-bit IEEE 754 floating point (-1.7976931348623157E308 to 1.7976931348623157E308)
 
-So, we have 12x12x3x(int size) = `12*12*3*32` bits = 13824 bits, 1728 Bytes, ~1.7 KB
+~~So, we have 12x12x3x(int size) = `12*12*3*32` bits = 13824 bits, 1728 Bytes, ~1.7 KB~~
+
+> Correction: Previous answer is WRONG. We have only computed the "useful" part of memory needed to store pixels. But we forgot to include the pointers needed for the internal representation.
+
+Correction:
+
+> NB: The 4(H+WH) is the number of pointers, and 4(WH+H+1) is the header for each list, added by the `memalloc` like operation.
+
+![Correction of 3D array mem](./img/corrections/correction_size_3d_array.png)
 
 b) One way to reduce memory consumption is to transform the 3D array representation into a
 2D array representation. A pixel is packed into a single integer (32 bit), where each channel
@@ -136,6 +144,8 @@ width = 5.538552245452754 Inchs
 height = 2.556254882516656 Inchs
 
 > This means the screen size of a phone is considering the phone in landscape mode.
+>
+> In the correction, it's the opposite, but it doesn't really matter.
 
 Formula for pixel density: `nb of pixels = size in inch * PPI`
 
@@ -160,7 +170,7 @@ Now as a bonus, we compute PPI^2, wich is the number of pixel per inch square:
 
 1. Write down the uniform and median cut color quantization algorithms (In simple steps,
    not code/pseudocode).
-1.
+2.
 
 #### Kmean
 
@@ -198,7 +208,6 @@ def quantize_uniform(image, n_colors):
   
     return quantized
 ```
-
 
 #### median cut
 
