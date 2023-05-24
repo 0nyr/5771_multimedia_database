@@ -4,11 +4,18 @@
 
 In the field of image processing, we assume that we are using an 8-Bits grayscale image. The HK point operation is defined as follows: ``p_output = (alpha * p_input)+ beta``, where `p_input` and `p_output` are pixel values of the input and output image respectively.
 
-> Q?: What does HK means ???
+> Q?: What does HK means ??? -> "Helligkeit und Kontrast" (in german)
 
 1. How do the parameters `alpha` and `beta` influence the result of the operation?
 
 In the field of image processing, the operation you've described is a form of linear point operation or linear transformation. This operation is applied to each pixel in the image individually. Here's how the parameters `alpha` and `beta` influence the result:
+
+Short answer:
+
+* `alpha`: gain, contrast factor
+* `beta`: bias, brightness factor
+
+Long answer:
 
 - `alpha`: This parameter is a scaling factor. It determines the contrast of the output image. If `alpha` is greater than 1, the contrast of the image will increase. If `alpha` is less than 1 but greater than 0, the contrast of the image will decrease. If `alpha` is equal to 1, the contrast of the image will remain the same. If `alpha` is negative, the image will be inverted and the contrast may also change.
 - `beta`: This parameter is an offset or bias. It shifts the intensity values of the image. If `beta` is positive, the image will become brighter, as all pixel values are increased. If `beta` is negative, the image will become darker, as all pixel values are decreased. If `beta` is zero, the brightness of the image will remain the same.
@@ -69,7 +76,7 @@ Please note that this operation assumes that the input image has some variation 
 
 Figure above describes the region processing operation called (convolution). The application of the operation on all pixels of an image defines a linear filter.
 
-Convolution is a fundamental operation in image processing that involves applying a filter or kernel to an image. This operation is performed by sliding the kernel over the image and computing the sum of the products between the corresponding elements of the image and the kernel.
+Convolution is a fundamental operation in image processing that involves applying a filter or kernel to an image. This is an **abstraction** for the context surrounding a piece of information. This operation is performed by sliding the kernel over the image and computing the sum of the products between the corresponding elements of the image and the kernel.
 
 However, applying convolution to an image can lead to issues, especially at the edges of the image. Here are some problems that can occur:
 
@@ -118,6 +125,8 @@ As with any convolution operation, care must be taken when applying the moving a
 My answers below:
 
 ![pyramid area kernel](./img/pyramid_area_kernel.png)
+
+> WARN: I forgot to compute the square roots in the following answer!
 
 ![conical area kernel](./img/conical_area_kernel.png)
 
