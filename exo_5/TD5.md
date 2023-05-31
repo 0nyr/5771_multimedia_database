@@ -12,12 +12,11 @@ The baseline process of JPEG compression is widely used due to its effectiveness
 
 ### Shortly summarize the function of each step, and outline which ones are lossy
 
-
 The lossy sequential Discrete Cosine Transform (DCT)-based JPEG compression algorithm, commonly known as the Baseline Process or Basis mode, is a widely used method for compressing digital images. It involves several steps that aim to reduce the file size of an image while maintaining an acceptable level of visual quality. Here is an overview of the process:
 
 1. Color Space Conversion: The algorithm begins by converting the image from the RGB color space to the YCbCr color space. This conversion separates the image into three components: luminance (Y) and two chrominance components (Cb and Cr). The human visual system is more sensitive to changes in luminance than chrominance, so separating these components helps optimize compression efficiency.
 2. Partitioning into Blocks: The image is divided into 8x8-pixel blocks. Each block contains 64 pixels, which will be processed independently during compression. The subsequent steps are applied to each block separately.
-3. Discrete Cosine Transform (DCT): A two-dimensional DCT is applied to each block. The DCT converts the pixel values from the spatial domain to the frequency domain, representing the image as a combination of different frequency components. This transformation helps to concentrate most of the image information into fewer significant coefficients, which can be more efficiently compressed.
+3. Discrete Cosine Transform (DCT): A two-dimensional DCT is applied to each block. The DCT converts the pixel values from the spatial domain to the frequency domain, representing the image as a combination of different frequency components. This transformation helps to concentrate most of the image information into fewer significant coefficients, which can be more efficiently compressed. This is a lossy operation, but only slightly due to floating point precision operation.
 4. Quantization: The DCT coefficients obtained in the previous step are divided by a quantization matrix. This matrix determines the compression level and is typically adjusted based on user preferences or application requirements. The quantization process discards high-frequency components, which are less perceptually important, resulting in loss of information. Higher compression ratios lead to more aggressive quantization and greater loss of quality.
 5. Zigzag Scanning: The quantized DCT coefficients are arranged in a zigzag pattern to convert the two-dimensional array into a one-dimensional sequence. This reordering helps to group the significant coefficients together, facilitating their subsequent encoding and compression.
 6. Run-Length Encoding (RLE): The zigzag-ordered DCT coefficients are then encoded using RLE. The RLE algorithm replaces consecutive runs of zeros with a special symbol indicating the number of zeros in the run. This step helps to exploit the high occurrence of zero-valued coefficients in images, further reducing the amount of data to be encoded.
@@ -29,7 +28,6 @@ During decompression, the reverse operations are performed in the same order to 
 It's important to note that the lossy sequential DCT-based JPEG compression algorithm introduces irreversible loss of information due to quantization and subsequent compression steps. The degree of loss can be controlled by adjusting compression parameters, balancing the desired file size reduction with the acceptable level of visual quality.
 
 #### lossy step :
-
 
 Lossy steps in the baseline process of JPEG compression refer to the operations that introduce irreversible loss of information in order to achieve higher compression ratios. These steps intentionally discard some image details that are considered less perceptually important. The lossy steps in the baseline process include:
 
@@ -43,6 +41,7 @@ It's important to note that the lossy steps in JPEG compression aim to balance t
 
 ### What are the advantages of converting the color space from RGB to YUV (or. Y CbCr)?
 
+> The human visual system is more sensitive to changes in luminance than chrominance.
 
 Converting the color space from RGB to YUV (or YCbCr) in the JPEG compression algorithm offers several advantages. These include:
 
@@ -55,7 +54,6 @@ Overall, converting the color space from RGB to YUV (YCbCr) in JPEG compression 
 
 ### What does subsampling of chrominance elements mean? (Consider the ratios 4:4:4, 4:2:2 and 4:2:0).
 
-
 Subsampling of chrominance elements refers to the process of reducing the spatial resolution or sampling rate of the chrominance components (U and V or Cb and Cr) compared to the luminance component (Y) in an image or video signal. It is a technique commonly used in compression algorithms, such as JPEG and video coding standards like MPEG, to achieve further data reduction while minimizing the impact on perceived visual quality.
 
 The notation used to represent chrominance subsampling ratios is in the form of "Y:U:V" or "Y:Cb:Cr," where the numbers indicate the sampling rates of the respective components. Let's consider the common subsampling ratios:
@@ -67,7 +65,6 @@ The notation used to represent chrominance subsampling ratios is in the form of 
 It's important to note that chrominance subsampling introduces a loss of color information, particularly in fine color details and textures. However, the human visual system is less sensitive to color changes compared to luminance changes, making chrominance subsampling an effective technique for reducing data without significant perceptual degradation. The choice of subsampling ratio depends on the specific application requirements, available bandwidth, and desired trade-off between compression efficiency and color fidelity.
 
 ### Why should the size of the image be scaled first before encoding? And how does scaling work with respect to image blocks and minimum coded units (MCUs)?
-
 
 Scaling the size of the image before encoding in the JPEG compression algorithm is beneficial for several reasons:
 
@@ -87,7 +84,6 @@ It's important to note that scaling the image before encoding is an optional pre
 
 ### What is the task of the Forward Discrete Cosine Transform (F-DCT) during the JPEG compression?
 
-
 The task of the Forward Discrete Cosine Transform (F-DCT) during JPEG compression is to convert the image data from the spatial domain to the frequency domain. It is a key step in the compression process and plays a fundamental role in achieving efficient compression of digital images.
 
 The F-DCT transforms each 8x8 block of pixel values in the image into a corresponding 8x8 block of frequency coefficients. This transformation is based on the mathematical concept of the Discrete Cosine Transform (DCT), which represents the image as a combination of different frequency components.
@@ -104,7 +100,6 @@ In summary, the task of the Forward Discrete Cosine Transform (F-DCT) in JPEG co
 
 ### In a DCT-transformed block, which parts are most useful for compression ?
 
-
 In a DCT-transformed block, the coefficients located in the top-left corner (low-frequency region) are generally the most useful for compression. These coefficients represent the lower-frequency components of the block, which tend to contain the majority of the visually important information in an image.
 
 The DCT coefficients in the top-left corner correspond to the lower spatial frequencies, which capture large-scale patterns, smooth variations, and overall structure of the image. These coefficients have a higher magnitude compared to the coefficients in the high-frequency regions, indicating their significance in representing the image content.
@@ -118,7 +113,6 @@ By quantizing and reducing the precision of the higher-frequency components, whi
 It's worth noting that the specific coefficients considered most useful for compression may vary depending on the specific application, image content, and compression parameters used. Different compression algorithms may also employ variations in how the DCT coefficients are quantized and encoded to optimize compression efficiency and visual quality.
 
 ### In this context, explain the notions DC coefficient and AC coefficient
-
 
 In the context of JPEG compression and the Discrete Cosine Transform (DCT), the terms "DC coefficient" and "AC coefficient" refer to different types of coefficients obtained from the transformed image blocks.
 
@@ -137,7 +131,6 @@ The AC coefficients, due to their high-frequency nature, are also more prone to 
 In summary, the DC coefficient represents the average brightness or intensity of an image block, while the AC coefficients capture the variations and high-frequency details. The DC coefficient is usually more visually significant and less susceptible to quantization, while the AC coefficients provide finer spatial information but are more prone to compression artifacts.
 
 ### How can the values of the quantization matrix (and quantization factor) influence the perceived quality?
-
 
 The values of the quantization matrix and the quantization factor in JPEG compression play a crucial role in determining the perceived quality of the compressed image. These values directly affect the level of compression applied to the DCT coefficients and, consequently, the visual fidelity of the reconstructed image. Here's how the values of the quantization matrix and quantization factor influence perceived quality:
 
@@ -169,7 +162,6 @@ To summarize, the purpose of entropy coding as the last step of JPEG compression
 
 ### What is the main contibution of (Run Length Encoding (RLE)) to data compression? How is a data block processed at this stage?
 
-
 The main contribution of Run Length Encoding (RLE) to data compression is its ability to efficiently represent sequences of repeated data values. RLE is a simple and straightforward compression technique that is particularly effective when there are long runs of the same value in the data.
 
 In RLE, a data block is processed by identifying consecutive runs of the same value and encoding them using a compact representation. Instead of explicitly storing each value individually, RLE represents the data as a sequence of value-count pairs.
@@ -187,7 +179,6 @@ During decompression, the encoded data is processed in reverse to reconstruct th
 RLE is most effective when there are repeated values or long runs of the same value in the data. It achieves good compression ratios in such scenarios by eliminating the need to store each value individually, instead representing them as value-count pairs. However, RLE may not provide significant compression gains when there is little or no repetition in the data, as the encoding overhead may outweigh the compression benefits.
 
 ### Why are DC- and AC-coefficients entropy coded differently? Which procedure is generally recommended for encoding DC-coefficients, and which one for AC-coefficients?
-
 
 DC-coefficients and AC-coefficients in JPEG compression are entropy coded differently due to their statistical characteristics and perceptual importance.
 
