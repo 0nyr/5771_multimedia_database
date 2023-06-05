@@ -26,6 +26,7 @@ def encode(input_string: str) -> list[int]:
             remaining_window = window[:-1]
 
             result.append(table[remaining_window])
+            print("new entry: <", window, len(table), ">")
             table[window] = len(table)
             window = last_char
 
@@ -45,17 +46,31 @@ def decode(input_list: list[int]) -> str:
     table = {i: chr(i) for i in range(256)}
 
     # initialize variables
-    result: str = ""
-    last_decoded_string: str = ""
+    # WARN: need to take the first value out of input_list
+    init_value = input_list[0]
+    result: str = "" + table[init_value]
+    last_decoded_string: str = result
 
     # loop through input list
-    for code in input_list:
+    for code in input_list[1:]:
         # get decoded string
-        current_decoded = table[code]
+        if code in table:
+            current_decoded = table[code]
+        else:
+            # corner case explained:
+            #   source: https://github.com/amycardoso/lzw-text-file-compression/blob/master/lzw.py by Amy Cardoso
+            #   Bit is not in the dictionary
+            #   Get the last character printed + the first position of the last character printed
+            #   because we must decode bits that are not present in the dictionary, so we have to guess what it represents, for example:
+            #   let's say bit 37768 is not in the dictionary, so we get the last character printed, for example it was 'uh'
+            #   and we take it 'uh' plus its first position 'u', resulting in 'uhu', which is the representation of bit 37768
+            #   the only case where this can happen is if the substring starts and ends with the same character ("uhuhu").
+            current_decoded = last_decoded_string + last_decoded_string[0] # corner case
 
         # build table
         window = last_decoded_string + current_decoded[0] # first character of the current decoded string
         if window not in table.values():
+            print("code:", code, "new entry: <", len(table), window, ">")
             table[len(table)] = window
 
         # we always have the code in the table since we are building it as we go
