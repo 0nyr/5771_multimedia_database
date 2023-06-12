@@ -109,10 +109,9 @@ W W W W
 W W W W
 ```
 
-
 1. Apply an even colour quantification for 8 colours. Which quantification area (range) do the colours in the two images belong to?
 
-We're working in a color space like RGB where colors can be represented as points in a three-dimensional space with axes for Red, Green, and Blue. 
+We're working in a color space like RGB where colors can be represented as points in a three-dimensional space with axes for Red, Green, and Blue.
 
 In an 8-color quantization, the RGB color space is typically divided into eight equal parts. This could be done by dividing each of the Red, Green, and Blue axes into two parts, resulting in eight different blocks (2^3).
 
@@ -143,7 +142,7 @@ These categorizations assume that the colors in the images are fully saturated a
 
 A color histogram of an image represents the frequency of each color appearing in the image. Since these images are 4x4 pixels and use only two or three colors, the histograms can be easily calculated.
 
-For Image 1: There are 8 Red (R) pixels and 8 White (W) pixels. Thus, the color histogram would be: 
+For Image 1: There are 8 Red (R) pixels and 8 White (W) pixels. Thus, the color histogram would be:
 
 ```
 Red: 8
@@ -248,3 +247,13 @@ The Black (B) pixels have an RGB value of (0, 0, 0). All components fall into Bi
 The White (W) pixels, as before, would be categorized in `Bin-R-4-G-4-B-4`.
 
 This method of color quantization takes into account the different color components of each pixel, and can preserve more color information than a simple grayscale binning approach. However, it also results in a larger number of bins, which can increase the complexity of the image data.
+
+### Aufgabe 4: distance computing
+
+![comp 1](img/computation_1.jpg)
+
+![comp 2](img/computation_2.jpg)
+
+![comp 3](img/computation_3.jpg)
+
+![comp 4](img/computation_4.jpg)
