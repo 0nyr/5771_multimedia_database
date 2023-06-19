@@ -1,0 +1,31 @@
+// Zoo Database
+digraph {
+	A [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD><B>Animals</B></TD></TR>
+    <TR><TD>
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR><TD>Name</TD></TR>
+            <TR><TD>Gender</TD></TR>
+            <TR><TD>Type</TD></TR>
+            <TR><TD>Age</TD></TR>
+            <TR><TD>Image</TD></TR>
+        </TABLE>
+    </TD></TR></TABLE>>]
+	K [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD><B>Keepers</B></TD></TR>
+    <TR><TD>
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR><TD>Name</TD></TR>
+            <TR><TD>Pass-photo</TD></TR>
+        </TABLE>
+    </TD></TR></TABLE>>]
+	C [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+    <TR><TD><B>Cages</B></TD></TR>
+    <TR><TD>
+        <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+            <TR><TD>Pitch</TD></TR>
+        </TABLE>
+    </TD></TR></TABLE>>]
+	A -> C [fontsize=20 headlabel=1 labelangle=45 labeldistance=2.5 taillabel=1]
+	C -> K [fontsize=20 headlabel="1..*" labelangle=-45 labeldistance=2.5 taillabel="*"]
+}
