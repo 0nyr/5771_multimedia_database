@@ -9,6 +9,7 @@ digraph {
             <TR><TD>Type</TD></TR>
             <TR><TD>Age</TD></TR>
             <TR><TD>Image</TD></TR>
+            <TR><TD>FK: features</TD></TR>
         </TABLE>
     </TD></TR></TABLE>>]
 	K [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
@@ -17,6 +18,7 @@ digraph {
         <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
             <TR><TD>Name</TD></TR>
             <TR><TD>Pass-photo</TD></TR>
+            <TR><TD>FK: features</TD></TR>
         </TABLE>
     </TD></TR></TABLE>>]
 	C [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
@@ -26,6 +28,6 @@ digraph {
             <TR><TD>Pitch</TD></TR>
         </TABLE>
     </TD></TR></TABLE>>]
-	A -> C [fontsize=20 headlabel=1 labelangle=45 labeldistance=2.5 taillabel=1]
+	A -> C [fontsize=20 headlabel=1 labelangle=45 labeldistance=2.5 taillabel="*"]
 	C -> K [fontsize=20 headlabel="1..*" labelangle=-45 labeldistance=2.5 taillabel="*"]
 }
