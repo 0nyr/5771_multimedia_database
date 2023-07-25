@@ -82,7 +82,7 @@ Conversion: RGB <-> CMY
 
 ![rgb cmy](conversion_rgb_cmy.png)
 
-So 
+So
 
 C = 1 - R = 1 - 0,2 = 0,8
 
@@ -91,6 +91,8 @@ M = 1 - G = 1 - 0,6 = 0,4
 Y = 1 - B = 1 - 0,3 = 0,7
 
 K = Min(C, M, Y) = 0.4
+
+> WARNING: this is WRONG... The course only give computation formula for CMY model... which is NOT equal to CMYK model... (lol)
 
 Conversion: RGB <-> HSV
 

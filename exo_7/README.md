@@ -1,4 +1,4 @@
-# Exercise sheet 7
+# Exercise sheet 7"
 
 ### Aufgabe 1: Content-Based Retrieval
 
